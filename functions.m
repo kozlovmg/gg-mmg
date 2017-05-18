@@ -83,4 +83,4 @@ B3[s_,t_,m_]:=Module[{y1p,y1m,x1p,x1m,x2p,x2m,y2p,y2m,x3p,x3m,tmp},
 
 (*Integral functions*)
 
-G[a_,b_,c_]:=NIntegrate[Log[(b-c x+Sqrt[1-x^2-(b x-c)^2])/2/Sqrt[1-x^2]]/(1-a x),{x,-1,1}];
+G[a_,b_,c_]:=NIntegrate[Log[(b-c x+Sqrt[1-x^2+(b x-c)^2])/2/Sqrt[1-x^2]]/(1-a x),{x,-1,1}];
