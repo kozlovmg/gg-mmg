@@ -1,35 +1,37 @@
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_pow_int.h>
+#define _GNU_SOURCE
 
-#define Pi M_PI
-#define Sqrt sqrt
-#define Power gsl_pow_int
+#include <math.h>
 
 
-
+#define Power powl
+#define Pi M_PIl
 
 
 
-double Cpart6(double s,double s1,double s2,double t1,double t2){
-    double dn1 = s1 - 1;
-    double dn2 = s2 - 1;
-    double dn3 = t1 - 1;
-    double dn4 = t2 - 1;
-    double dc1 = s - s2 + t1;
-    double dc2 = s - s1 + t2;
-    double dc3 = t1 - t2;
-    double dc4 = -1 + s + t2;
-    double dc5 = s2 - t1;
-    double dc6 = s1 - t2;
-    double dc7 = t1 - t2 + s1 - s2;
-    double dm1 = Power(s,2) + Power(-1 + s2,2) - 2*s*(1 + s2);
-    double dm2 = -3 + Power(s,2) + Power(s1,2) + 2*s2 + Power(s2,2) + 2*s1*(-1 + s2 - t1) - 2*s*(-1 + s1 + s2 - t1) - 2*t1 - 2*s2*t1 + Power(t1,2) + 4*t2;
-    double dm3 = Power(s,2) + Power(-1 + s1,2) - 2*s*(1 + s1);
-    double dm4 = -3 + Power(s,2) + Power(s1,2) - 2*s2 + Power(s2,2) + 4*t1 + 2*s1*(1 + s2 - t2) - 2*s*(-1 + s1 + s2 - t2) - 2*t2 - 2*s2*t2 + Power(t2,2); 
-    double dm5 = Power(s1,2) + 2*s1*t1 + Power(t1,2) - 4*t2; 
-    double dm6 = Power(s2,2) - 4*t1 + 2*s2*t2 + Power(t2,2);
+
+
+
+
+long double Cpart6(long double s,long double s1,long double s2,long double t1,long double t2){
+    long double dn1 = s1 - 1;
+    long double dn2 = s2 - 1;
+    long double dn3 = t1 - 1;
+    long double dn4 = t2 - 1;
+    long double dc1 = s - s2 + t1;
+    long double dc2 = s - s1 + t2;
+    long double dc3 = t1 - t2;
+    long double dc4 = -1 + s + t2;
+    long double dc5 = s2 - t1;
+    long double dc6 = s1 - t2;
+    long double dc7 = t1 - t2 + s1 - s2;
+    long double dm1 = Power(s,2) + Power(-1 + s2,2) - 2*s*(1 + s2);
+    long double dm2 = -3 + Power(s,2) + Power(s1,2) + 2*s2 + Power(s2,2) + 2*s1*(-1 + s2 - t1) - 2*s*(-1 + s1 + s2 - t1) - 2*t1 - 2*s2*t1 + Power(t1,2) + 4*t2;
+    long double dm3 = Power(s,2) + Power(-1 + s1,2) - 2*s*(1 + s1);
+    long double dm4 = -3 + Power(s,2) + Power(s1,2) - 2*s2 + Power(s2,2) + 4*t1 + 2*s1*(1 + s2 - t2) - 2*s*(-1 + s1 + s2 - t2) - 2*t2 - 2*s2*t2 + Power(t2,2); 
+    long double dm5 = Power(s1,2) + 2*s1*t1 + Power(t1,2) - 4*t2; 
+    long double dm6 = Power(s2,2) - 4*t1 + 2*s2*t2 + Power(t2,2);
     
-    double a=(((4*(64 + 12*s - 16*s1 - 24*s2 + (4*(dc5 + dn4))/(-2 + s1 + s2) - 
+    long double a=(((4*(64 + 12*s - 16*s1 - 24*s2 + (4*(dc5 + dn4))/(-2 + s1 + s2) - 
             (2*(dc5 + dn4)*(-3 + s2))/(-2 + s1 + s2) + 
             (4*(-2 + s + s1 + s2))/(dc5 + dn4) - 
             (2*dn2*(-2 + s + s1 + s2))/(dc5 + dn4) - 
