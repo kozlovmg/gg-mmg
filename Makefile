@@ -11,8 +11,8 @@ main.o: main.c
 born.o: born.c
 	gcc $(CFLAGS) born.c
 
-a.out: main.o nlo2.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o nlo_functions.o born.o
-	gcc $(LDFLAGS) main.o nlo2.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o nlo_functions.o born.o $(LIBS)
+a.out: main.o nlo2.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o Cpart7.o nlo_functions.o born.o
+	gcc $(LDFLAGS) main.o nlo2.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o Cpart7.o nlo_functions.o born.o $(LIBS)
 	
 
 
@@ -60,6 +60,9 @@ Cpart5.o: Cpart5.c
 	
 Cpart6.o: Cpart6.c
 	gcc $(CFLAGS) Cpart6.c
+	
+Cpart7.o: Cpart7.c
+	gcc $(CFLAGS) Cpart7.c
 	
 Csum.o: Csum.c
 	gcc $(CFLAGS) Csum.c

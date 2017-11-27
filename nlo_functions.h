@@ -13,18 +13,20 @@ double ff(double x, double y);
 double bb(double x);
 double X(double a);
 
+long double pw_n(long double,unsigned int);
+
 /*Masters*/
 //Bubles
-double R1(double x);
-double R2(double x);
+long double R1(long double x);
+long double R2(long double x);
 
 //Triangles
 double T1(double x);
 double T2(double t1,double t2);
-double T3(double t1, double t2);
+double T3(double t1,double t2);
 double T4(double x);
 double T5(double x);
-double T6(double s, double t);
+double T6(double s,double t);
 
 //Boxes
 double B1(double s,double t,double m);

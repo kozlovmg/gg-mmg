@@ -1,4 +1,4 @@
-#define _GNU_SOURCE
+
 
 #include <math.h>
 #include <gsl/gsl_math.h>
@@ -9,43 +9,56 @@
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_complex_math.h>
 
-#define Pi M_PIl
+#define Pi M_PI
 #define Sqrt sqrt
-#define Power powl
-#define ln logl
-#define Log logl
-#define arctan atanl
+#define Power gsl_pow_int
+#define ln gsl_sf_log_abs
+#define Log gsl_sf_log_abs
+#define arctan atan
 
 #define plus gsl_complex_add
 #define div gsl_complex_div
 
+double B1_inty(double , void *);
+double B1_integrand(double , void *);
 
-
+long double pw_n(long double x,unsigned int a)
+{
+    long double tmp=1.;
+    do
+    {
+        if (a & 1) tmp=tmp*x;
+        a>>=1;
+        x=x*x;
+    }
+    while(a);
+    return tmp;
+};
 
 /*some functions*/
 
-long double ln2b(long double x)
+double ln2b(double x)
 {
     if(x<0) 
     {
-        return Power( ln((1+sqrtl(1-4/x))/(sqrtl(1-4/x)-1)) ,2);
+        return Power( Log((1+sqrt(1-4/x))/(sqrt(1-4/x)-1)) ,2);
     };
     if(x>4)
     {
-        return Power( ln((1+sqrtl(1-4/x))/(sqrtl(1-4/x)-1)) ,2)-Power(Pi,2);
+        return Power( Log((1+sqrt(1-4/x))/(sqrt(1-4/x)-1)) ,2)-Power(Pi,2);
     }
     else
     {
-        return -Power(Pi-2*atanl(sqrt(4/x-1)),2);
+        return -Power(Pi-2*atan(sqrt(4/x-1)),2);
     };   
     if(x==0) return 0.;
-    return 0;
+    return 0.;
 };
 
 
 
 
-long double Li2(long double x)
+double Li2(double x)
 {
     if (x<=1) return gsl_sf_dilog(x);
     else return Power(Pi,2)/6.-ln(x)*ln(1-x)-gsl_sf_dilog(1-x);
@@ -268,42 +281,42 @@ double X(double a)
     
 long double R1(long double x)
 {
-    return (1/x-1)*ln(1-x);
+    return (1./x-1.)*logl(fabsl(1.-x));
     };
 
 long double R2(long double x)
 {
-    if(x<0 || x>4)
+    if(x<0. || x>4.)
     { 
-        return -(sqrtl(1 - 4/x)*ln((1 + sqrtl(1 - 4/x))/(1 - sqrtl(1 - 4/x))));
+        return -sqrtl(1. - 4./x)*logl( fabsl( (1. + sqrtl(1. - 4./x))/(1. - sqrtl(1. - 4./x)) ) );
     }
     else
     {
-        return sqrtl(4/x-1)*(2*atanl(sqrtl(4/x-1))-Pi);
+        return sqrtl(4./x-1.)*(2.*atanl(sqrtl(4./x-1.))-Pi);
     };
 };
 
-long double T1(long double x)
+double T1(double x)
 {
     return  (Power(Pi,2)/6.-Li2(1+x))/x;
     };
 
-long double T3(long double t1,long double t2)
+double T3(double t1,double t2)
 {
     return -(Li2(t1)-Li2(t2))/(t1-t2);
     };
     
-long double T4(long double x)
+double T4(double x)
 {
-    return result=(Li2(1-x)+ln(x)*ln(x-1))/(x-1);
+    return (Li2(1-x)+ln(x)*ln(x-1))/(x-1);
      };
     
-long double T5(long double x)
+double T5(double x)
 {
     return ln2b(x)/2/x;
     };
 
-long double T6(long double s,long double t)
+double T6(double s,double t)
 {
     return (ln2b(s)-ln2b(t))/(2.*(s - t));
     };
@@ -317,9 +330,9 @@ double F(double x)
 
 /*Complicated functions*/
 
-long double T2(long double t1,long double t2)
+double T2(double t1,double t2)
 {
-    long double x1,x2,x3,x31,x32,D3;
+    double x1,x2,x3,x31,x32,D3;
     D3=sqrt(Power((t1+t2-1),2)-4.*t1*t2);
     x1=(1.-Power(t1,2)-t2+t1*t2+(1.+t1)*D3)/2./t1/D3;
     x2=-(-2.+2.*t1+3.*t2+t1*t2-Power(t2,2)+(t2-2.)*D3)/(D3*(1.+t1-t2+D3));
