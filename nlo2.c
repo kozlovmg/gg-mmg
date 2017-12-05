@@ -20,8 +20,12 @@ double nlo2(double *vars){
     rr=Rr(s,s1,s2,t1,t2,EE);
     cc=C(s,s1,s2,t1,t2);
     ik=IK(s,s1,s2,t1,t2,EE,np1,np2);
-    a=b1+b2+b3+tr+rr+cc+ik;
-    //if(a>10000000.) printf("nlo2 function: b1=%e  b2=%e  b3=%e  tr=%e  rr=%e  cc=%e ik=%e\n",b1,b2,b3,tr,rr,cc,ik);
-    //a=Box2(s,s1,s2,t1,t2)+Box3(s,s1,s2,t1,t2)+Tri(s,s1,s2,t1,t2)+Rr(s,s1,s2,t1,t2,EE)+C(s,s1,s2,t1,t2,EE,np1,np2)+Box1(s,s1,s2,t1,t2)+IK(s,s1,s2,t1,t2,EE,np1,np2);
+    a=2.*(b1+b2+b3+tr+rr+cc+ik);// "2" because nlo2=Re(Mnlo*(Mborn)^*)
+    /*if(a>10000000.)
+    { 
+        printf("nlo2 function: b1=%e  b2=%e  b3=%e  tr=%e  rr=%e  cc=%e ik=%e\n",b1,b2,b3,tr,rr,cc,ik);
+        printf("u1=%e  u2=%e\n",-(s+t2-s1-1),-(s+t1-s2-1));
+    };*/
+    
     return a;
 };

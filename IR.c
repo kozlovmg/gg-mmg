@@ -712,9 +712,7 @@ double IK(double s,double s1,double s2,double t1,double t2,double EE,double np1,
                s1*(-19 + 17*t2 - 2*s2*t2 + t1*(3 + t2)) + 
                s*(-15 + 2*Power(s1,2) + 4*s2 - t1 + 19*t2 - s2*t2 - 
                   t1*t2 + Power(t2,2) + s1*(s2 - 3*(6 + t2)))))/
-           (s - s2 + t1))/(Power(-1 + s1,2)*Power(s - s1 + t2,2)))*
-     G(Sqrt(1 - 4/Power(-s + s1 + s2,2)),np1,
-      (np1 - (2*np2)/(s - s1 - s2))/Sqrt(1 - 4/Power(-s + s1 + s2,2))))/
+           (s - s2 + t1))/(Power(-1 + s1,2)*Power(s - s1 + t2,2)))*( G(Sqrt(1 - 4/Power(-s + s1 + s2,2)),np1,(np1 - (2*np2)/(s - s1 - s2))/Sqrt(1 - 4/Power(-s + s1 + s2,2)))+Log(4.) ) )/
    Power(Pi,2);
    return a;
 };
