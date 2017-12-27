@@ -20,6 +20,7 @@
 
 
 
+double nlo1(double *);
 double nlo2(double *);
 double born(double *);
 
@@ -43,7 +44,8 @@ void display_results(char *, double, double);
 double born_mc(double *, size_t, void *);
 double born_mc_v3(double *, size_t, void *);
 
-double nlo_mc(double *, size_t, void *);
+double nlo1_mc(double *, size_t, void *);
+double nlo2_mc(double *, size_t, void *);
 
 
 
@@ -93,7 +95,7 @@ int main(int argc, char *argv[])
     
     
     // calls of function
-    size_t N=500000;
+    size_t N=50000;
     
     // initialisation of random numbers generator
     const gsl_rng_type *T;
@@ -110,8 +112,9 @@ int main(int argc, char *argv[])
     params[1] = EminG;
     params[2] = Ecut;
     
-    //func.f = &born_mc;
-    func.f = &nlo_mc;
+    func.f = &born_mc;
+    //func.f = &nlo1_mc;
+    //func.f = &nlo2_mc;
     func.dim = 4;
     func.params = &params;
     
@@ -436,7 +439,7 @@ double born_mc_v3(double *inv, size_t dim, void *params)
 
 
 
-double nlo_mc(double *inv, size_t dim, void *params)
+double nlo1_mc(double *inv, size_t dim, void *params)
 {
     (void)(dim);
     double *pars = (double *)params;
@@ -470,11 +473,52 @@ double nlo_mc(double *inv, size_t dim, void *params)
             vars[5] = np1;
             vars[6] = np2;
             vars[7] = Ec;
-            result = nlo2(vars)*PhaseVol(s,s1,s2,t1)/( 2*s*Power(2*Pi,5) );        
+            result = nlo1(vars)*PhaseVol(s,s1,s2,t1)/( 2*s*Power(2*Pi,5) );        
         }
         else result=0.;
         
         
+    }
+    else
+    {
+        result = 0.;
+    };
+    
+    return result;
+
+};
+
+double nlo2_mc(double *inv, size_t dim, void *params)
+{
+    (void)(dim);
+    double *pars = (double *)params;
+    double vars[6];
+    double s1,s2,t1,lam; // variables
+    double m, t2, np1, np2; // temporary variables
+    double s, Ec, Em;
+    double result;
+        
+    s1=inv[0];
+    s2=inv[1];
+    t1=inv[2];
+    lam=inv[3];
+    
+    s=pars[0];
+    Em=pars[1];
+    Ec=pars[2];
+    np1 = (s-s2+1)/sqrt(s)/2;
+    np2 = (s-s1+1)/sqrt(s)/2;
+        
+    if( (s1+s2-2)/sqrt(s)>=Em && Gk(s,t1,s2,0.,0.,1.)<0 && Gk(s1,s2,s,0.,1.,1.)<0  ) 
+    {
+        t2 = t2_func(s,s1,s2,t1,lam);
+        vars[0] = s;
+        vars[1] = s1;
+        vars[2] = s2;
+        vars[3] = t1;
+        vars[4] = t2;
+        vars[5] = m;
+        result = nlo2(vars)*PhaseVol(s,s1,s2,t1)/( 2*s*Power(2*Pi,5) );        
     }
     else
     {
