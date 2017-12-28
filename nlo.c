@@ -8,12 +8,29 @@ double Box3(double s,double s1,double s2,double t1,double t2);
 double Tri(double s,double s1,double s2,double t1,double t2);
 double Rr(double s,double s1,double s2,double t1,double t2, double EE);
 
-double lbl1(double,double,double,double,double,double);
-double lbl2(double,double,double,double,double,double);
-double lbl3(double,double,double,double,double,double);
-double lbl4(double,double,double,double,double,double);
-double lbl5(double,double,double,double,double,double);
-double lbl6(double,double,double,double,double,double);
+double lbl11(double,double,double,double,double,double);
+double lbl12(double,double,double,double,double,double);
+double lbl13(double,double,double,double,double,double);
+
+double lbl21(double,double,double,double,double,double);
+double lbl22(double,double,double,double,double,double);
+double lbl23(double,double,double,double,double,double);
+
+double lbl31(double,double,double,double,double,double);
+double lbl32(double,double,double,double,double,double);
+double lbl33(double,double,double,double,double,double);
+
+double lbl41(double,double,double,double,double,double);
+double lbl42(double,double,double,double,double,double);
+double lbl43(double,double,double,double,double,double);
+
+double lbl51(double,double,double,double,double,double);
+double lbl52(double,double,double,double,double,double);
+double lbl53(double,double,double,double,double,double);
+
+double lbl61(double,double,double,double,double,double);
+double lbl62(double,double,double,double,double,double);
+double lbl63(double,double,double,double,double,double);
 
 
 
@@ -41,12 +58,12 @@ double nlo1(double *vars){
 double nlo2(double *vars){
     double s=vars[0], s1=vars[1], s2=vars[2], t1=vars[3], t2=vars[4], m=vars[5];
     double r1,r2,r3,r4,r5,r6,a;
-    r1=lbl1(s,s1,s2,t1,t2,m);
-    r2=lbl2(s,s1,s2,t1,t2,m);
-    r3=lbl3(s,s1,s2,t1,t2,m);
-    r4=lbl4(s,s1,s2,t1,t2,m);
-    r5=lbl5(s,s1,s2,t1,t2,m);
-    r6=lbl6(s,s1,s2,t1,t2,m);
+    r1=lbl11(s,s1,s2,t1,t2,m)+lbl12(s,s1,s2,t1,t2,m)+lbl13(s,s1,s2,t1,t2,m);
+    r2=lbl21(s,s1,s2,t1,t2,m)+lbl22(s,s1,s2,t1,t2,m)+lbl23(s,s1,s2,t1,t2,m);
+    r3=lbl31(s,s1,s2,t1,t2,m)+lbl32(s,s1,s2,t1,t2,m)+lbl33(s,s1,s2,t1,t2,m);
+    r4=lbl41(s,s1,s2,t1,t2,m)+lbl42(s,s1,s2,t1,t2,m)+lbl43(s,s1,s2,t1,t2,m);
+    r5=lbl51(s,s1,s2,t1,t2,m)+lbl52(s,s1,s2,t1,t2,m)+lbl53(s,s1,s2,t1,t2,m);
+    r6=lbl61(s,s1,s2,t1,t2,m)+lbl62(s,s1,s2,t1,t2,m)+lbl63(s,s1,s2,t1,t2,m);
     a=(r1+r2+r3+r4+r5+r6)/4.;
     return a;
 };

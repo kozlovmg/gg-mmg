@@ -2,94 +2,26 @@ CFLAGS=-c -Wall  -I/usr/local/include
 LDFLAGS=-L/usr/local/lib 
 LIBS=-lgsl -lgslcblas -lm 
 
-all: a.out 
+SOURCES=main.c  nlo_functions.c  nlo.c  born.c\
+B1.c  B3.c  B2.c  \
+T.c  IR.c  R.c  \
+Cpart1.c Cpart2.c Cpart3.c Cpart4.c Cpart5.c Cpart6.c Csum.c \
+lbl-1_1.c  lbl-1_2.c  lbl-1_3.c \
+lbl-2_1.c  lbl-2_2.c  lbl-2_3.c \
+lbl-3_1.c  lbl-3_2.c  lbl-3_3.c \
+lbl-4_1.c  lbl-4_2.c  lbl-4_3.c \
+lbl-5_1.c  lbl-5_2.c  lbl-5_3.c \
+lbl-6_1.c  lbl-6_2.c  lbl-6_3.c
+         
 
+OBJECTS=$(SOURCES:.c=.o)
 
-main.o: main.c
-	gcc $(CFLAGS) main.c
-	
-born.o: born.c
-	gcc $(CFLAGS) born.c
+EXECUTABLE=nlo
 
-a.out: main.o nlo.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o lbl-1.o lbl-2.o lbl-3.o lbl-4.o lbl-5.o lbl-6.o nlo_functions.o born.o
-	gcc $(LDFLAGS) main.o nlo.o B1.o B2.o B3.o T.o R.o IR.o Csum.o Cpart1.o Cpart2.o Cpart3.o Cpart4.o Cpart5.o Cpart6.o nlo_functions.o born.o lbl-1.o lbl-2.o lbl-3.o lbl-4.o lbl-5.o lbl-6.o $(LIBS)
+all: $(SOURCES) $(EXECUTABLE)
 	
+$(EXECUTABLE): $(OBJECTS) 
+	gcc $(LDFLAGS) $(OBJECTS) -o $@  $(LIBS)
 
-
-nlo.o: nlo.c
-	gcc $(CFLAGS) nlo.c
-
-
-B1.o: B1.c
-	gcc $(CFLAGS) B1.c
-
-
-B2.o: B2.c
-	gcc $(CFLAGS) B2.c
-
-
-B3.o: B3.c
-	gcc $(CFLAGS) B3.c
-	
-
-T.o: T.c
-	gcc $(CFLAGS) T.c
-	
-
-R.o: R.c
-	gcc $(CFLAGS) R.c
-	
-
-IR.o: IR.c
-	gcc $(CFLAGS) IR.c
-
-Cpart1.o: Cpart1.c
-	gcc $(CFLAGS) Cpart1.c
-	
-Cpart2.o: Cpart2.c
-	gcc $(CFLAGS) Cpart2.c
-	
-Cpart3.o: Cpart3.c
-	gcc $(CFLAGS) Cpart3.c
-	
-Cpart4.o: Cpart4.c
-	gcc $(CFLAGS) Cpart4.c
-	
-Cpart5.o: Cpart5.c
-	gcc $(CFLAGS) Cpart5.c
-	
-Cpart6.o: Cpart6.c
-	gcc $(CFLAGS) Cpart6.c
-	
-Csum.o: Csum.c
-	gcc $(CFLAGS) Csum.c
-	
-nlo_functions.o: nlo_functions.c
-	gcc $(CFLAGS) nlo_functions.c
-	
-lbl-1.o: lbl-1.c
-	gcc $(CFLAGS) lbl-1.c
-	
-lbl-2.o: lbl-2.c
-	gcc $(CFLAGS) lbl-2.c
-	
-lbl-3.o: lbl-3.c
-	gcc $(CFLAGS) lbl-3.c
-
-lbl-4.o: lbl-4.c
-	gcc $(CFLAGS) lbl-4.c
-	
-lbl-5.o: lbl-5.c
-	gcc $(CFLAGS) lbl-5.c
-	
-lbl-6.o: lbl-6.c
-	gcc $(CFLAGS) lbl-6.c
-
-
-
-	
-
-
-	
-	
-	
+.c.o:
+	gcc $(CFLAGS) $< -o $@
